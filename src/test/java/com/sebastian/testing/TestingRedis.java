@@ -1,7 +1,7 @@
 package com.sebastian.testing;
 
 import io.lettuce.core.RedisClient;
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -31,12 +31,12 @@ public class TestingRedis {
   }
 
   @Test
-  public void redisOk() {
+  public void redisFuncionaLocalmenteEnPruebas() {
     var client = RedisClient.create("redis://localhost:6000");
     try (var con = client.connect()) {
       var sync = con.sync();
       sync.set("clave", "valor");
-      Assertions.assertThat(sync.get("clave")).isEqualTo("valor");
+      assertThat(sync.get("clave")).isEqualTo("valor");
     }
   }
 }
